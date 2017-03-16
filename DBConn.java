@@ -1,24 +1,18 @@
 package prosjekt;
 
 import java.sql.*;
-import java.util.Properties;
+
+//klassen oppretter en forbindelse til en lokal database på localhost:3306, med brukernavn=admin og passord=passord
 
 public abstract class DBConn {
-	
-	    protected Connection conn;
-	    public DBConn() {
-	    }
-	    public void connect() {
-	    	try {
-	            Class.forName("com.mysql.jdbc.Driver").newInstance();
-	            // Properties for user and password. Here the user and password are both 'paulr'
-	            Properties p = new Properties();
-	            p.put("user", "myuser");
-	            p.put("password", "mypassword");           
-	            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/prosjekt?autoReconnect=true&useSSL=false",p);
-	        } catch (Exception e)
-	    	{
-	            throw new RuntimeException("Unable to connect", e);
-	    	}
-	    }
+	protected Connection conn;
+	protected int oktId;
+
+	public DBConn(){
+		try {
+		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/min_database?autoReconnect=true&useSSL=false", "admin", "passord"); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}	
 }
